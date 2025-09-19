@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../store'
+import { RootState, AppDispatch } from '../store'
 import { loadStoredAuthAsync } from '../store/slices/authSlice'
 
 // Screens
@@ -105,7 +105,7 @@ const AppDrawer = () => {
 }
 
 const AppNavigator = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const { isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {

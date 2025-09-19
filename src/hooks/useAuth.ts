@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../store'
+import { RootState, AppDispatch } from '../store'
 import { useCallback } from 'react'
 import { loginAsync, logoutAsync, loadStoredAuthAsync, clearError } from '../store/slices/authSlice'
 import { LoginRequest } from '../types'
 
 export const useAuth = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const { user, token, isAuthenticated, isLoading, error } = useSelector(
     (state: RootState) => state.auth
   )

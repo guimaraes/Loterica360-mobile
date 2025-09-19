@@ -76,5 +76,5 @@ export const useCanAccess = (resource: string, action: string = 'read') => {
   const resourcePermissions = userPermissions[resource as keyof typeof userPermissions]
   if (!resourcePermissions) return false
 
-  return resourcePermissions.includes(action)
+  return (resourcePermissions as string[]).includes(action)
 }

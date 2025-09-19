@@ -2,7 +2,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message'
 
-const API_BASE_URL = 'http://localhost:8080/api/v1'
+const API_BASE_URL = 'http://192.168.0.57:8080/api/v1'
 
 // Criar instância do axios
 export const api = axios.create({
