@@ -32,8 +32,17 @@ const AuthStack = () => (
 const AppDrawer = () => {
   const { user } = useSelector((state: RootState) => state.auth)
   
+  // Definir tela inicial baseada no papel do usuário
+  const getInitialRouteName = () => {
+    if (user?.papel === 'VENDEDOR') {
+      return 'Vendas'
+    }
+    return 'Dashboard'
+  }
+  
   return (
     <Drawer.Navigator
+      initialRouteName={getInitialRouteName()}
       drawerContent={(props) => <DrawerContent {...props} user={user} />}
       screenOptions={{
         headerShown: false,
@@ -42,19 +51,28 @@ const AppDrawer = () => {
         },
       }}
     >
-      <Drawer.Screen 
-        name="Dashboard" 
-        component={DashboardScreen}
-        options={{ title: 'Dashboard' }}
-      />
+      {user?.papel !== 'VENDEDOR' && (
+        <Drawer.Screen 
+          name="Dashboard" 
+          component={DashboardScreen}
+          options={{ title: 'Dashboard' }}
+        />
+      )}
       
       {user?.papel === 'VENDEDOR' ? (
-        // Vendedor só pode acessar vendas
-        <Drawer.Screen 
-          name="Vendas" 
-          component={VendasScreen}
-          options={{ title: 'Vendas' }}
-        />
+        // Vendedor só pode acessar vendas e clientes
+        <>
+          <Drawer.Screen 
+            name="Vendas" 
+            component={VendasScreen}
+            options={{ title: 'Vendas' }}
+          />
+          <Drawer.Screen 
+            name="Clientes" 
+            component={ClientesScreen}
+            options={{ title: 'Clientes' }}
+          />
+        </>
       ) : (
         // Outros perfis podem acessar outras telas
         <>

@@ -7,15 +7,15 @@ export const authService = {
   async login(credentials: LoginRequest): Promise<LoginResponse> {
     log.debug('Tentando fazer login:', credentials.email)
     const response = await api.post('/auth/login', credentials)
-    const { token, user } = response.data
+    const { token, usuario } = response.data
 
     // Salvar token e usuário no AsyncStorage
     await AsyncStorage.setItem(TOKEN_STORAGE_KEY, token)
-    await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
+    await AsyncStorage.setItem(USER_STORAGE_KEY, JSON.stringify(usuario))
     
-    log.info('Login realizado com sucesso:', user.email)
+    log.info('Login realizado com sucesso:', usuario.email)
 
-    return { token, user }
+    return { token, user: usuario }
   },
 
   async logout(): Promise<void> {

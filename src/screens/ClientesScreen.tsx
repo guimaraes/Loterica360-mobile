@@ -155,7 +155,7 @@ const ClientesScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.menuButton}
-          onPress={() => dispatch(setSidebarOpen(true))}
+          onPress={() => navigation.openDrawer()}
         >
           <Icon name="menu" size={24} color="#333" />
         </TouchableOpacity>
@@ -226,13 +226,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 16,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    paddingTop: 50, // Adicionar espaço para a status bar
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
   },
   menuButton: {
-    padding: 8,
+    padding: 12,
+    marginLeft: -4, // Ajustar posição
+    minWidth: 44, // Área mínima de toque
+    minHeight: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerTitle: {
     fontSize: 20,
@@ -241,11 +248,20 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: '#6200ea',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
+    marginRight: -4, // Ajustar posição
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   searchContainer: {
     padding: 16,

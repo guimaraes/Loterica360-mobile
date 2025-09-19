@@ -35,7 +35,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({ user, ...props }) => {
           style: 'destructive',
           onPress: async () => {
             await logout()
-            dispatch(setSidebarOpen(false))
+            navigation.closeDrawer()
           },
         },
       ]
@@ -130,7 +130,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({ user, ...props }) => {
               style={styles.menuItem}
               onPress={() => {
                 navigation.navigate(item.route as never)
-                dispatch(setSidebarOpen(false))
+                navigation.closeDrawer()
               }}
             >
               <Icon name={item.icon} size={24} color="#666" />
