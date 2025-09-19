@@ -14,3 +14,4 @@ config.resolver.assetExts.push(
 )
 
 module.exports = config
+

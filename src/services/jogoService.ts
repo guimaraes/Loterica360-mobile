@@ -32,3 +32,4 @@ export const jogoService = {
     return response.data
   },
 }
+
