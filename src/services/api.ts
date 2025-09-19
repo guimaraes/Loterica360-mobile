@@ -1,13 +1,12 @@
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message'
-
-const API_BASE_URL = 'http://192.168.0.57:8080/api/v1'
+import { API_BASE_URL, API_TIMEOUT, TOKEN_STORAGE_KEY, USER_STORAGE_KEY, log } from '../config/environment'
 
 // Criar instância do axios
 export const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: API_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -17,12 +16,13 @@ export const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     try {
-      const token = await AsyncStorage.getItem('token')
+      const token = await AsyncStorage.getItem(TOKEN_STORAGE_KEY)
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
+        log.debug('Token adicionado à requisição:', config.url)
       }
     } catch (error) {
-      console.error('Erro ao obter token:', error)
+      log.error('Erro ao obter token:', error)
     }
     return config
   },
@@ -34,17 +34,19 @@ api.interceptors.request.use(
 // Response interceptor para tratar erros
 api.interceptors.response.use(
   (response) => {
+    log.debug('Resposta da API:', response.config.url, response.status)
     return response
   },
   async (error) => {
-    console.log('API Error:', error)
+    log.error('Erro da API:', error.config?.url, error.response?.status, error.message)
 
     const errorResponse = error.response?.data
 
     if (error.response?.status === 401) {
       // Token expirado ou inválido
-      await AsyncStorage.removeItem('token')
-      await AsyncStorage.removeItem('user')
+      await AsyncStorage.removeItem(TOKEN_STORAGE_KEY)
+      await AsyncStorage.removeItem(USER_STORAGE_KEY)
+      log.warn('Token expirado ou inválido, dados locais removidos')
       // Redirecionar para login será feito pelo componente
     } else if (error.response?.status === 403) {
       const message = errorResponse?.detail || 'Você não tem permissão para realizar esta ação'
