@@ -10,6 +10,7 @@ import {
   Platform,
   Modal,
   FlatList,
+  TextInput,
 } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { useNavigation } from '@react-navigation/native'
@@ -217,7 +218,17 @@ const VendaCaixaForm: React.FC<VendaCaixaFormProps> = ({
               >
                 <Icon name="remove" size={20} color="#666" />
               </TouchableOpacity>
-              <Text style={styles.quantityText}>{formData.quantidade}</Text>
+              <TextInput
+                style={styles.quantityTextInput}
+                value={formData.quantidade.toString()}
+                onChangeText={(text) => {
+                  const value = parseInt(text) || 1
+                  handleInputChange('quantidade', Math.max(1, value))
+                }}
+                keyboardType="numeric"
+                textAlign="center"
+                maxLength={3}
+              />
               <TouchableOpacity
                 style={styles.quantityButton}
                 onPress={() => handleInputChange('quantidade', formData.quantidade + 1)}
@@ -454,6 +465,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     minWidth: 40,
     textAlign: 'center',
+  },
+  quantityTextInput: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginHorizontal: 20,
+    minWidth: 50,
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
   },
   summaryContainer: {
     backgroundColor: '#e3f2fd',

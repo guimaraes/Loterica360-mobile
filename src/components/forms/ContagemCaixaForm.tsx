@@ -9,6 +9,7 @@ import {
   Platform,
   Modal,
   FlatList,
+  TextInput,
 } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -208,7 +209,17 @@ const ContagemCaixaForm: React.FC<ContagemCaixaFormProps> = ({
         >
           <Icon name="remove" size={16} color="#666" />
         </TouchableOpacity>
-        <Text style={styles.quantityValue}>{value}</Text>
+        <TextInput
+          style={styles.quantityTextInput}
+          value={value.toString()}
+          onChangeText={(text) => {
+            const newValue = parseInt(text) || 0
+            handleInputChange(field, Math.max(0, newValue))
+          }}
+          keyboardType="numeric"
+          textAlign="center"
+          maxLength={4}
+        />
         <TouchableOpacity
           style={styles.quantityButton}
           onPress={() => handleInputChange(field, value + 1)}
@@ -472,6 +483,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     minWidth: 24,
     textAlign: 'center',
+  },
+  quantityTextInput: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginHorizontal: 12,
+    minWidth: 40,
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
   },
   summaryContainer: {
     backgroundColor: '#e8f5e8',
