@@ -7,10 +7,9 @@ import {
   TouchableOpacity,
   RefreshControl,
   Dimensions,
+  SafeAreaView,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
-import { setSidebarOpen } from '../store/slices/uiSlice'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { DashboardMetrics } from '../types'
 
@@ -18,7 +17,6 @@ const { width } = Dimensions.get('window')
 
 const DashboardScreen: React.FC = () => {
   const navigation = useNavigation()
-  const dispatch = useDispatch()
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -96,12 +94,12 @@ const DashboardScreen: React.FC = () => {
   )
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.menuButton}
-          onPress={() => dispatch(setSidebarOpen(true))}
+          onPress={() => navigation.openDrawer()}
         >
           <Icon name="menu" size={24} color="#333" />
         </TouchableOpacity>
@@ -223,7 +221,7 @@ const DashboardScreen: React.FC = () => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -236,13 +234,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+    minHeight: 56,
   },
   menuButton: {
-    padding: 8,
+    padding: 12,
+    minWidth: 48,
+    minHeight: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTitle: {
     fontSize: 20,
@@ -250,7 +254,11 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   refreshButton: {
-    padding: 8,
+    padding: 12,
+    minWidth: 48,
+    minHeight: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
     flex: 1,
@@ -342,4 +350,5 @@ const styles = StyleSheet.create({
 })
 
 export default DashboardScreen
+
 

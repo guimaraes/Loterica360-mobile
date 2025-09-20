@@ -47,15 +47,24 @@ export interface Cliente {
 export interface VendaCaixa {
   id: string
   caixaId: string
+  numeroCaixa: number
+  descricaoCaixa?: string
+  jogoId: string
+  nomeJogo: string
+  precoJogo: number
+  quantidade: number
+  valorTotal: number
+  dataVenda: string
+  usuarioId: string
+  nomeUsuario: string
+  criadoEm: string
+}
+
+export interface VendaCaixaRequest {
+  caixaId: string
   jogoId: string
   quantidade: number
-  precoUnitario: number
-  precoTotal: number
   dataVenda: string
-  vendedorId: string
-  clienteId?: string
-  criadoEm: string
-  atualizadoEm: string
 }
 
 export interface Bolao {
@@ -73,23 +82,53 @@ export interface Bolao {
 
 export interface Caixa {
   id: string
-  nome: string
+  numero: number
+  descricao?: string
   ativo: boolean
   criadoEm: string
-  atualizadoEm: string
 }
 
 export interface ContagemCaixa {
   id: string
   caixaId: string
+  numeroCaixa: number
+  descricaoCaixa?: string
   dataContagem: string
-  valorInicial: number
-  valorFinal: number
-  diferenca: number
-  observacoes?: string
-  responsavelId: string
+  usuarioId: string
+  nomeUsuario: string
+  notas200: number
+  notas100: number
+  notas50: number
+  notas20: number
+  notas10: number
+  notas5: number
+  notas2: number
+  moedas1: number
+  moedas050: number
+  moedas025: number
+  moedas010: number
+  moedas005: number
+  totalNotas: number
+  totalMoedas: number
+  totalGeral: number
   criadoEm: string
-  atualizadoEm: string
+}
+
+export interface ContagemCaixaRequest {
+  caixaId: string
+  dataContagem: string
+  notas200: number
+  notas100: number
+  notas50: number
+  notas20: number
+  notas10: number
+  notas5: number
+  notas2: number
+  moedas1: number
+  moedas050: number
+  moedas025: number
+  moedas010: number
+  moedas005: number
 }
 
 export interface DashboardMetrics {
@@ -140,4 +179,5 @@ export interface MenuSection {
   title: string
   items: MenuItem[]
 }
+
 

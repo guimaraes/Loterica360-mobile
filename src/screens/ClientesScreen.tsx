@@ -8,10 +8,10 @@ import {
   RefreshControl,
   Alert,
   TextInput,
+  SafeAreaView,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
-import { setSidebarOpen } from '../store/slices/uiSlice'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Cliente } from '../types'
 
@@ -150,7 +150,7 @@ const ClientesScreen: React.FC = () => {
   )
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
@@ -213,7 +213,7 @@ const ClientesScreen: React.FC = () => {
           </View>
         }
       />
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -226,20 +226,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    paddingTop: 50, // Adicionar espaço para a status bar
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+    minHeight: 56,
   },
   menuButton: {
     padding: 12,
-    marginLeft: -4, // Ajustar posição
-    minWidth: 44, // Área mínima de toque
-    minHeight: 44,
-    alignItems: 'center',
+    minWidth: 48,
+    minHeight: 48,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTitle: {
     fontSize: 20,
@@ -248,12 +247,11 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: '#6200ea',
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: -4, // Ajustar posição
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

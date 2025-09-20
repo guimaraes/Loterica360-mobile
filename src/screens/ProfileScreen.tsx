@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { View, Text, StyleSheet, TouchableOpacity, Alert, SafeAreaView } from 'react-native'
+import { useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { setSidebarOpen } from '../store/slices/uiSlice'
+import { useNavigation } from '@react-navigation/native'
 import { useAuth } from '../hooks/useAuth'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const ProfileScreen: React.FC = () => {
-  const dispatch = useDispatch()
+  const navigation = useNavigation()
   const { user } = useSelector((state: RootState) => state.auth)
   const { logout } = useAuth()
 
@@ -37,11 +37,11 @@ const ProfileScreen: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.menuButton}
-          onPress={() => dispatch(setSidebarOpen(true))}
+          onPress={() => navigation.openDrawer()}
         >
           <Icon name="menu" size={24} color="#333" />
         </TouchableOpacity>
@@ -99,7 +99,7 @@ const ProfileScreen: React.FC = () => {
           <Text style={styles.logoutText}>Sair</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -219,4 +219,5 @@ const styles = StyleSheet.create({
 })
 
 export default ProfileScreen
+
 

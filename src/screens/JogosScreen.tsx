@@ -9,14 +9,11 @@ import {
   Alert,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
-import { setSidebarOpen } from '../store/slices/uiSlice'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Jogo } from '../types'
 
 const JogosScreen: React.FC = () => {
   const navigation = useNavigation()
-  const dispatch = useDispatch()
   
   const [jogos, setJogos] = useState<Jogo[]>([])
   const [refreshing, setRefreshing] = useState(false)
@@ -97,7 +94,7 @@ const JogosScreen: React.FC = () => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.menuButton}
-          onPress={() => dispatch(setSidebarOpen(true))}
+          onPress={() => navigation.openDrawer()}
         >
           <Icon name="menu" size={24} color="#333" />
         </TouchableOpacity>
@@ -219,4 +216,5 @@ const styles = StyleSheet.create({
 })
 
 export default JogosScreen
+
 

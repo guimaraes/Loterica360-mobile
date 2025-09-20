@@ -10,8 +10,6 @@ import {
 import { DrawerContentScrollView, DrawerContentComponentProps } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native'
 import { useAuth } from '../../hooks/useAuth'
-import { useDispatch } from 'react-redux'
-import { setSidebarOpen } from '../../store/slices/uiSlice'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { User } from '../../types'
 
@@ -22,7 +20,6 @@ interface DrawerContentProps extends DrawerContentComponentProps {
 const DrawerContent: React.FC<DrawerContentProps> = ({ user, ...props }) => {
   const navigation = useNavigation()
   const { logout } = useAuth()
-  const dispatch = useDispatch()
 
   const handleLogout = () => {
     Alert.alert(

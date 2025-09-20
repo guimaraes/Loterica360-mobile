@@ -30,6 +30,5 @@ export const jogoService = {
   async toggleJogoStatus(id: string): Promise<Jogo> {
     const response = await api.patch(`/jogos/${id}/toggle-status`)
     return response.data
-  },
+  }
 }
-

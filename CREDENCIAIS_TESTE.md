@@ -56,3 +56,4 @@ Se houver problemas de conexão:
 2. Verifique se o IP da rede não mudou: `ifconfig | grep inet`
 3. Teste o login via API: `curl -X POST http://192.168.0.57:8080/api/v1/auth/login -H "Content-Type: application/json" -d '{"email":"teste@teste.com","senha":"password"}'`
 
+

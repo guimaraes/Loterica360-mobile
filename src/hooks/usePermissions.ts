@@ -79,3 +79,4 @@ export const useCanAccess = (resource: string, action: string = 'read') => {
   return (resourcePermissions as string[]).includes(action)
 }
 
+
